@@ -1,0 +1,6 @@
+[azure]
+openai_api_key = "a8cc5c22b6124d548b4c314b755a9326"
+openai_endpoint = "https://innoc1-d-use-ollie-openai.openai.azure.com/openai/deployments/gpt-4o-mini/chat/completions?api-version=2025-01-01-preview"
+model = "gpt-4o-mini"
+max_tokens = 1000
+temperature = 0.7
