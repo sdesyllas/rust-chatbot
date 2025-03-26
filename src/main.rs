@@ -11,6 +11,7 @@ use config::{Config, ConfigError};
 use futures::StreamExt;
 use serde::Deserialize;
 use std::io::{self, Write};
+use ferris_says::say;
 
 #[derive(Debug, Deserialize)]
 struct Settings {
@@ -39,6 +40,12 @@ impl Settings {
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    // Display welcome message with Ferris
+    let welcome_message = "Welcome to Rust Chat Bot with Azure OpenAI, ask me anything!";
+    let mut writer = io::BufWriter::new(io::stdout());
+    say(welcome_message, 40, &mut writer)?;
+    writer.flush()?;
+
     // Load configuration
     let settings = match Settings::new() {
         Ok(settings) => settings,
@@ -54,7 +61,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         return Err("Missing API key or endpoint".into());
     }
 
-    println!("{}", "Welcome to Azure OpenAI Chatbot!".green().bold());
     println!("{}", "Type your messages and press Enter. Type 'exit' to quit.".cyan());
 
     // Set up Azure OpenAI client
